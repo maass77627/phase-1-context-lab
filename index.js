@@ -2,10 +2,10 @@
 
 function createEmployeeRecord(employee) {
     let newEmployee = {
-        firstName: employee.firstName,
-        familyName: employee.familyName,
-        title: employee.title,
-        payPerHour: employee.payPerHour,
+        firstName: employee[0],
+        familyName: employee[1],
+        title: employee[2],
+        payPerHour: employee[3],
         timeInEvents: [],
         timeOutEvents: [],
         }
@@ -20,26 +20,41 @@ function createEmployeeRecords(employees) {
 
 function createTimeInEvent(dateTime) {
     let hour = dateTime.split(" ")[1].slice(0,2)
-    console.log(hour)
     let date = dateTime.split(" ")[0]
-    console.log(date)
-    let timeIn = {
+    
+    this.timeInEvents.push({
         type: "TimeIn",
-        hour: hour,
+        hour: parseInt(hour, 10),
         date: date,
-    }
-    return timeIn
+    })
+    return this
 }
 
-function createTimeOutEvent() {
+function createTimeOutEvent(dateTime) {
+     let hour = dateTime.split(" ")[1].slice(0,2)
+    let date = dateTime.split(" ")[0]
+    
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: parseInt(hour, 10),
+        date: date,
+    })
+    return this
+
 
 }
 
-function hoursWorkedOnDate() {
+function hoursWorkedOnDate(date) {
+    let timeout = this.timeOutEvents.find((event) => event.date === date)
+    let timein = this.timeInEvents.find((event) => event.date === date)
+    let hoursworked = timeout.hour - timein.hour
+    return parseInt(hoursworked)
 
 }
 
-function wagesEarnedOnDate() {
+function wagesEarnedOnDate(date) {
+    let hours = hoursWorkedOnDate.call(this,date)
+    return hours * this.payPerHour
 
 }
 
