@@ -1,4 +1,3 @@
-/* Your Code Here */
 
 function createEmployeeRecord(employee) {
     let newEmployee = {
@@ -58,15 +57,18 @@ function wagesEarnedOnDate(date) {
 
 }
 
-// function allWagesFor() {
 
-// }
 
-function findEmployeeByFirstName() {
+function findEmployeeByFirstName(employees, firstName) {
+    return employees.find((employee) => employee.firstName === firstName)
 
 }
 
-function calculatePayroll() {
+function calculatePayroll(employees) {
+   return employees.reduce((accum, employee) =>  {
+       return accum + allWagesFor.call(employee)
+        
+}, 0)
 
 }
 
