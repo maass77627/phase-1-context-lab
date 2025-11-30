@@ -19,7 +19,7 @@ function createEmployeeRecords(employees) {
 }
 
 function createTimeInEvent(dateTime) {
-    let hour = dateTime.split(" ")[1].slice(0,2)
+    let hour = dateTime.split(" ")[1]
     let date = dateTime.split(" ")[0]
     
     this.timeInEvents.push({
@@ -31,7 +31,7 @@ function createTimeInEvent(dateTime) {
 }
 
 function createTimeOutEvent(dateTime) {
-     let hour = dateTime.split(" ")[1].slice(0,2)
+     let hour = dateTime.split(" ")[1]
     let date = dateTime.split(" ")[0]
     
     this.timeOutEvents.push({
@@ -47,8 +47,8 @@ function createTimeOutEvent(dateTime) {
 function hoursWorkedOnDate(date) {
     let timeout = this.timeOutEvents.find((event) => event.date === date)
     let timein = this.timeInEvents.find((event) => event.date === date)
-    let hoursworked = timeout.hour - timein.hour
-    return parseInt(hoursworked)
+    let hoursworked = (timeout.hour - timein.hour) / 100
+    return hoursworked
 
 }
 
